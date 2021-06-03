@@ -9,8 +9,8 @@ import Foundation
 
 class Trailer: Codable {
     let id: String?
-    let iso_639_1: String?
-    let iso_3166_1: String?
+    let iso6391: String?
+    let iso31661: String?
     let key: String?
     let name: String?
     let site: String?
@@ -19,8 +19,8 @@ class Trailer: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
-        case iso_639_1
-        case iso_3166_1
+        case iso6391 = "iso_639_1"
+        case iso31661 = "iso_3166_1"
         case key
         case name
         case site
@@ -30,8 +30,8 @@ class Trailer: Codable {
 
     init(
         id: String?,
-        iso_639_1: String?,
-        iso_3166_1: String?,
+        iso6391: String?,
+        iso31661: String?,
         key: String?,
         name: String?,
         site: String?,
@@ -39,8 +39,8 @@ class Trailer: Codable {
         type: String?
     ) {
         self.id = id
-        self.iso_639_1 = iso_639_1
-        self.iso_3166_1 = iso_3166_1
+        self.iso6391 = iso6391
+        self.iso31661 = iso31661
         self.key = key
         self.name = name
         self.site = site

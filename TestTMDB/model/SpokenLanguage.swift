@@ -8,23 +8,23 @@
 import Foundation
 
 class SpokenLanguage: Codable {
-    let iso_639_1: String?
+    let iso6391: String?
     let name: String?
-    let english_name: String?
+    let englishName: String?
 
     enum CodingKeys: String, CodingKey {
-        case iso_639_1
+        case iso6391 = "iso_639_1"
         case name
-        case english_name
+        case englishName = "english_name"
     }
 
     init(
-        iso_639_1: String?,
+        iso6391: String?,
         name: String?,
-        english_name: String?
+        englishName: String?
     ) {
-        self.iso_639_1 = iso_639_1
+        self.iso6391 = iso6391
         self.name = name
-        self.english_name = english_name
+        self.englishName = englishName
     }
 }

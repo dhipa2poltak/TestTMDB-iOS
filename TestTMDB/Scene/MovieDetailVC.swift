@@ -5,36 +5,8 @@
 //  Created by user on 24/03/21.
 //
 
-import Foundation
-import Alamofire
 import Kingfisher
-import SVProgressHUD
 import UIKit
-
-class MovieDetailVM: BaseVM {
-
-    var movieId = -1
-    var movieDetailsResponse: MovieDetailsResponse?
-
-    func fetchMovieDetail(movieId: Int) {
-        SVProgressHUD.showGradient()
-        request(RestService.fetchMovieDetail(movieId: movieId)).responseJSON { [weak self] resp in
-            SVProgressHUD.dismiss()
-            resp.validate { json in
-                do {
-                    let data = try json.rawData(options: .prettyPrinted)
-
-                    let response = try JSONDecoder().decode(MovieDetailsResponse.self, from: data)
-                    self?.movieDetailsResponse = response
-
-                    self?.didLayout()
-                } catch {
-                    SVProgressHUD.showDismissableError(with: error.localizedDescription)
-                }
-            }
-        }
-    }
-}
 
 class MovieDetailVC: BaseVC {
     lazy var viewModel = MovieDetailVM(vc: self)
@@ -58,7 +30,7 @@ class MovieDetailVC: BaseVC {
     @objc override func layouting(notification _: NSNotification? = nil) {
         lblTitleMovie.text = viewModel.movieDetailsResponse?.title
 
-        if let posterPath = viewModel.movieDetailsResponse?.poster_path {
+        if let posterPath = viewModel.movieDetailsResponse?.posterPath {
             let urlImage = Constant.IMAGE_URL_BASE_PATH + posterPath
             ivMovie.kf.setImage(with: URL(string: urlImage))
         }

@@ -11,28 +11,28 @@ class ReviewResponse: Codable {
     let id: Int?
     let page: Int?
     let results: [Review]?
-    let total_pages: Int?
-    let total_results: Int?
+    let totalPages: Int?
+    let totalResults: Int?
 
     enum CodingKeys: String, CodingKey {
         case id
         case page
         case results
-        case total_pages
-        case total_results
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
     }
 
     init(
         id: Int?,
         page: Int?,
         results: [Review]?,
-        total_pages: Int?,
-        total_results: Int?
+        totalPages: Int?,
+        totalResults: Int?
     ) {
         self.id = id
         self.page = page
         self.results = results
-        self.total_pages = total_pages
-        self.total_results = total_results
+        self.totalPages = totalPages
+        self.totalResults = totalResults
     }
 }

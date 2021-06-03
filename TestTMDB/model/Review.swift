@@ -9,38 +9,38 @@ import Foundation
 
 class Review: Codable {
     let author: String?
-    let author_details: AuthorDetails?
+    let authorDetails: AuthorDetails?
     let content: String?
-    let created_at: String?//Date?
+    let createdAt: String?//Date?
     let id: String?
-    let updated_at: String?//Date?
+    let updatedAt: String?//Date?
     let url: String?
 
     enum CodingKeys: String, CodingKey {
         case author
-        case author_details
+        case authorDetails = "author_details"
         case content
-        case created_at
+        case createdAt = "created_at"
         case id
-        case updated_at
+        case updatedAt = "updated_at"
         case url
     }
 
     init(
         author: String?,
-        author_details: AuthorDetails?,
+        authorDetails: AuthorDetails?,
         content: String?,
-        created_at: String/*Date?*/,
+        createdAt: String/*Date?*/,
         id: String?,
-        updated_at: String/*Date?*/,
+        updatedAt: String/*Date?*/,
         url: String?
     ) {
         self.author = author
-        self.author_details = author_details
+        self.authorDetails = authorDetails
         self.content = content
-        self.created_at = created_at
+        self.createdAt = createdAt
         self.id = id
-        self.updated_at = updated_at
+        self.updatedAt = updatedAt
         self.url = url
     }
 }

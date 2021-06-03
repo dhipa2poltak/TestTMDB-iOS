@@ -38,7 +38,7 @@ class ReviewCVC: UICollectionViewCell {
     func bindData(review: Review) {
         lblContent.text = review.content
 
-        if var avatarPath = review.author_details?.avatar_path {
+        if var avatarPath = review.authorDetails?.avatarPath {
             if avatarPath.starts(with: "/") {
                 avatarPath.remove(at: avatarPath.startIndex)
             }

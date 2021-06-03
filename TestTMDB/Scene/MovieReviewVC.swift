@@ -5,45 +5,7 @@
 //  Created by user on 24/03/21.
 //
 
-import Alamofire
-import Foundation
-import SVProgressHUD
 import UIKit
-
-class MovieReviewVM: BaseVM {
-
-    var reviews: [Review] = []
-    
-    var movieId = -1
-    var movieTitle = ""
-    var page = 1
-
-    func fetchMovieReviews(movieId: Int, page: Int) {
-        SVProgressHUD.showGradient()
-        request(RestService.fetchMovieReviews(movieId: movieId, page: page)).responseJSON { [weak self] resp in
-            SVProgressHUD.dismiss()
-            resp.validate { json in
-                do {
-                    let data = try json["results"].rawData(options: .prettyPrinted)
-
-                    let reviews: [Review] = try JSONDecoder().decode([Review].self, from: data)
-
-                    if reviews.count > 0 {
-                        for review in reviews {
-                            self?.reviews.append(review)
-                        }
-
-                        self?.page = page
-                    }
-
-                    self?.didLayout()
-                } catch {
-                    SVProgressHUD.showDismissableError(with: error.localizedDescription)
-                }
-            }
-        }
-    }
-}
 
 class MovieReviewVC: BaseVC {
     lazy var viewModel = MovieReviewVM(vc: self)

@@ -8,19 +8,19 @@
 import Foundation
 
 class ProductionCountry: Codable {
-    let iso_3166_1: String?
+    let iso31661: String?
     let name: String?
 
     enum CodingKeys: String, CodingKey {
-        case iso_3166_1
+        case iso31661 = "iso_3166_1"
         case name
     }
 
     init(
-        iso_3166_1: String?,
+        iso31661: String?,
         name: String?
     ) {
-        self.iso_3166_1 = iso_3166_1
+        self.iso31661 = iso31661
         self.name = name
     }
 }

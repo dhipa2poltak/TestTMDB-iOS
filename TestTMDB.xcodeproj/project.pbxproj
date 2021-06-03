@@ -50,6 +50,11 @@
 		CE2711E6260B7C3300126D1F /* ReviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2711E5260B7C3300126D1F /* ReviewResponse.swift */; };
 		CE27126B260C32E800126D1F /* Trailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE27126A260C32E800126D1F /* Trailer.swift */; };
 		CE271270260C344C00126D1F /* TrailerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE27126F260C344C00126D1F /* TrailerResponse.swift */; };
+		CE2BEA4B266938C500C0721A /* GenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BEA4A266938C500C0721A /* GenreVM.swift */; };
+		CE2BEA532669393000C0721A /* MovieByGenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BEA522669393000C0721A /* MovieByGenreVM.swift */; };
+		CE2BEA5B266939C900C0721A /* MovieDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BEA5A266939C900C0721A /* MovieDetailVM.swift */; };
+		CE2BEA6326693A4100C0721A /* MovieReviewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BEA6226693A4100C0721A /* MovieReviewVM.swift */; };
+		CE2BEA6B26693AB100C0721A /* MovieTrailerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BEA6A26693AB100C0721A /* MovieTrailerVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +129,11 @@
 		CE2711E5260B7C3300126D1F /* ReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewResponse.swift; sourceTree = "<group>"; };
 		CE27126A260C32E800126D1F /* Trailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trailer.swift; sourceTree = "<group>"; };
 		CE27126F260C344C00126D1F /* TrailerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerResponse.swift; sourceTree = "<group>"; };
+		CE2BEA4A266938C500C0721A /* GenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreVM.swift; sourceTree = "<group>"; };
+		CE2BEA522669393000C0721A /* MovieByGenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieByGenreVM.swift; sourceTree = "<group>"; };
+		CE2BEA5A266939C900C0721A /* MovieDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVM.swift; sourceTree = "<group>"; };
+		CE2BEA6226693A4100C0721A /* MovieReviewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewVM.swift; sourceTree = "<group>"; };
+		CE2BEA6A26693AB100C0721A /* MovieTrailerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerVM.swift; sourceTree = "<group>"; };
 		F618F9C91E229598564A8695 /* Pods-TestTMDB-TestTMDBUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestTMDB-TestTMDBUITests.release.xcconfig"; path = "Target Support Files/Pods-TestTMDB-TestTMDBUITests/Pods-TestTMDB-TestTMDBUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -292,10 +302,15 @@
 			isa = PBXGroup;
 			children = (
 				CE271122260AE00000126D1F /* GenreVC.swift */,
+				CE2BEA4A266938C500C0721A /* GenreVM.swift */,
 				CE271169260B0BA100126D1F /* MovieByGenreVC.swift */,
+				CE2BEA522669393000C0721A /* MovieByGenreVM.swift */,
 				CE27119C260B451100126D1F /* MovieDetailVC.swift */,
+				CE2BEA5A266939C900C0721A /* MovieDetailVM.swift */,
 				CE2711C4260B6ECA00126D1F /* MovieReviewVC.swift */,
+				CE2BEA6226693A4100C0721A /* MovieReviewVM.swift */,
 				CE2711CD260B70FD00126D1F /* MovieTrailerVC.swift */,
+				CE2BEA6A26693AB100C0721A /* MovieTrailerVM.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -592,9 +607,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2711C5260B6ECA00126D1F /* MovieReviewVC.swift in Sources */,
+				CE2BEA5B266939C900C0721A /* MovieDetailVM.swift in Sources */,
 				CE2711B1260B4D9400126D1F /* MovieDetailsResponse.swift in Sources */,
 				CE2711D4260B76E400126D1F /* ReviewCVC.swift in Sources */,
 				CE2710BF260AD85E00126D1F /* ViewController.swift in Sources */,
+				CE2BEA6326693A4100C0721A /* MovieReviewVM.swift in Sources */,
 				CE27116F260B19A400126D1F /* MovieByGenreCVC.swift in Sources */,
 				CE2711A2260B499900126D1F /* SpokenLanguage.swift in Sources */,
 				CE271114260ADDD400126D1F /* RestService.swift in Sources */,
@@ -605,6 +622,7 @@
 				CE2710BD260AD85E00126D1F /* SceneDelegate.swift in Sources */,
 				CE2711CE260B70FD00126D1F /* MovieTrailerVC.swift in Sources */,
 				CE2711DC260B7A5F00126D1F /* AuthorDetails.swift in Sources */,
+				CE2BEA4B266938C500C0721A /* GenreVM.swift in Sources */,
 				CE2710FD260ADAAC00126D1F /* Genre.swift in Sources */,
 				CE271162260AEF2900126D1F /* DataResponse+Ext.swift in Sources */,
 				CE271270260C344C00126D1F /* TrailerResponse.swift in Sources */,
@@ -616,9 +634,11 @@
 				CE27110B260ADC2E00126D1F /* Constant.swift in Sources */,
 				CE27126B260C32E800126D1F /* Trailer.swift in Sources */,
 				CE271143260AE7A400126D1F /* GenreTVC.swift in Sources */,
+				CE2BEA532669393000C0721A /* MovieByGenreVM.swift in Sources */,
 				CE271193260B3AF300126D1F /* Movie.swift in Sources */,
 				CE27119D260B451100126D1F /* MovieDetailVC.swift in Sources */,
 				CE27111D260ADEC500126D1F /* URLRequest+Ext.swift in Sources */,
+				CE2BEA6B26693AB100C0721A /* MovieTrailerVM.swift in Sources */,
 				CE2711E1260B7B1800126D1F /* Review.swift in Sources */,
 				CE271136260AE47300126D1F /* UIColor+Ext.swift in Sources */,
 				CE27115D260AEE9D00126D1F /* SVProgressHUD+Ext.swift in Sources */,
