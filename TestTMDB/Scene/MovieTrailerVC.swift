@@ -6,17 +6,19 @@
 //
 
 import Foundation
+import SVProgressHUD
 import YouTubePlayer
 
 class MovieTrailerVC: BaseVC, YouTubePlayerDelegate {
 
-    lazy var viewModel = MovieTrailerVM(vc: self)
+    lazy var viewModel = MovieTrailerVM()
 
     @IBOutlet weak var youtubePlayer: YouTubePlayerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setupObserver()
         youtubePlayer.delegate = self
     }
 
@@ -26,9 +28,28 @@ class MovieTrailerVC: BaseVC, YouTubePlayerDelegate {
         viewModel.fetchMovieTrailer(movieId: viewModel.movieId)
     }
 
-    @objc override func layouting(notification _: NSNotification? = nil) {
-        if !viewModel.movieKey.isEmpty {
-            youtubePlayer.loadVideoID(viewModel.movieKey)
+    private func setupObserver() {
+        viewModel.isShowDialogLoading.observe { value in
+            if value {
+                SVProgressHUD.setOffsetFromCenter(UIOffset(horizontal: UIApplication.shared.keyWindow?.center.x ?? 0, vertical: UIApplication.shared.keyWindow?.center.y ?? 0))
+                SVProgressHUD.showGradient()
+            } else {
+                SVProgressHUD.dismiss()
+            }
+        }
+
+        viewModel.toastMessage.observe { [weak self] value in
+            if !value.isEmpty {
+                self?.showToast(message: value, font: .systemFont(ofSize: 12.0))
+                self?.viewModel.toastMessage.value = ""
+            }
+        }
+
+        viewModel.movieKey.observe { [weak self] value in
+            if !value.isEmpty {
+                self?.youtubePlayer.loadVideoID(value)
+            }
+
         }
     }
 

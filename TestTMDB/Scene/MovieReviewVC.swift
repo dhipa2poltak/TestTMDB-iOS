@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class MovieReviewVC: BaseVC {
-    lazy var viewModel = MovieReviewVM(vc: self)
+    lazy var viewModel = MovieReviewVM()
 
     @IBOutlet weak var lblTitleMovie: UILabel!
     @IBOutlet weak var reviewCV: UICollectionView!
@@ -17,6 +18,8 @@ class MovieReviewVC: BaseVC {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         lblTitleMovie.text = viewModel.movieTitle
+
+        setupObserver()
 
         reviewCV.delegate = self
         reviewCV.dataSource = self
@@ -29,8 +32,29 @@ class MovieReviewVC: BaseVC {
         viewModel.fetchMovieReviews(movieId: viewModel.movieId, page: viewModel.page)
     }
 
-    @objc override func layouting(notification _: NSNotification? = nil) {
-        reviewCV.reloadData()
+    private func setupObserver() {
+        viewModel.isShowDialogLoading.observe { [weak self] value in
+            if value && self?.viewModel.reviews.isEmpty ?? true {
+                SVProgressHUD.setOffsetFromCenter(UIOffset(horizontal: UIApplication.shared.keyWindow?.center.x ?? 0, vertical: UIApplication.shared.keyWindow?.center.y ?? 0))
+                SVProgressHUD.showGradient()
+            } else {
+                SVProgressHUD.dismiss()
+            }
+        }
+
+        viewModel.toastMessage.observe { [weak self] value in
+            if !value.isEmpty {
+                self?.showToast(message: value, font: .systemFont(ofSize: 12.0))
+                self?.viewModel.toastMessage.value = ""
+            }
+        }
+
+        viewModel.reviewData.observe { [weak self] value in
+            if value != nil {
+                self?.reviewCV.reloadData()
+                self?.viewModel.reviewData.value = nil
+            }
+        }
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,

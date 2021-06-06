@@ -55,6 +55,8 @@
 		CE2BEA5B266939C900C0721A /* MovieDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BEA5A266939C900C0721A /* MovieDetailVM.swift */; };
 		CE2BEA6326693A4100C0721A /* MovieReviewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BEA6226693A4100C0721A /* MovieReviewVM.swift */; };
 		CE2BEA6B26693AB100C0721A /* MovieTrailerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BEA6A26693AB100C0721A /* MovieTrailerVM.swift */; };
+		CE339C75266D2C3200A0BC3F /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE339C74266D2C3200A0BC3F /* UIViewController+Ext.swift */; };
+		CE339C7B266D2CD500A0BC3F /* LiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE339C7A266D2CD500A0BC3F /* LiveData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +136,8 @@
 		CE2BEA5A266939C900C0721A /* MovieDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVM.swift; sourceTree = "<group>"; };
 		CE2BEA6226693A4100C0721A /* MovieReviewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewVM.swift; sourceTree = "<group>"; };
 		CE2BEA6A26693AB100C0721A /* MovieTrailerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerVM.swift; sourceTree = "<group>"; };
+		CE339C74266D2C3200A0BC3F /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		CE339C7A266D2CD500A0BC3F /* LiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveData.swift; sourceTree = "<group>"; };
 		F618F9C91E229598564A8695 /* Pods-TestTMDB-TestTMDBUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestTMDB-TestTMDBUITests.release.xcconfig"; path = "Target Support Files/Pods-TestTMDB-TestTMDBUITests/Pods-TestTMDB-TestTMDBUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +217,7 @@
 		CE2710B9260AD85E00126D1F /* TestTMDB */ = {
 			isa = PBXGroup;
 			children = (
+				CE339C79266D2CAB00A0BC3F /* BindingUtil */,
 				CE27113F260AE71500126D1F /* UIComponent */,
 				CE271127260AE36D00126D1F /* BaseClass */,
 				CE271121260ADFBA00126D1F /* Scene */,
@@ -294,6 +299,7 @@
 				CE271135260AE47300126D1F /* UIColor+Ext.swift */,
 				CE27115C260AEE9D00126D1F /* SVProgressHUD+Ext.swift */,
 				CE271161260AEF2900126D1F /* DataResponse+Ext.swift */,
+				CE339C74266D2C3200A0BC3F /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -365,6 +371,14 @@
 				CE2711D3260B76E400126D1F /* ReviewCVC.swift */,
 			);
 			path = ReviewCVC;
+			sourceTree = "<group>";
+		};
+		CE339C79266D2CAB00A0BC3F /* BindingUtil */ = {
+			isa = PBXGroup;
+			children = (
+				CE339C7A266D2CD500A0BC3F /* LiveData.swift */,
+			);
+			path = BindingUtil;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -618,6 +632,7 @@
 				CE27116A260B0BA100126D1F /* MovieByGenreVC.swift in Sources */,
 				CE2710BB260AD85E00126D1F /* AppDelegate.swift in Sources */,
 				CE271105260ADB7600126D1F /* GenreResponse.swift in Sources */,
+				CE339C7B266D2CD500A0BC3F /* LiveData.swift in Sources */,
 				CE271158260AEE3F00126D1F /* Typealias.swift in Sources */,
 				CE2710BD260AD85E00126D1F /* SceneDelegate.swift in Sources */,
 				CE2711CE260B70FD00126D1F /* MovieTrailerVC.swift in Sources */,
@@ -628,6 +643,7 @@
 				CE271270260C344C00126D1F /* TrailerResponse.swift in Sources */,
 				CE2711E6260B7C3300126D1F /* ReviewResponse.swift in Sources */,
 				CE271198260B3D5C00126D1F /* DiscoverMovieByGenreResponse.swift in Sources */,
+				CE339C75266D2C3200A0BC3F /* UIViewController+Ext.swift in Sources */,
 				CE271123260AE00000126D1F /* GenreVC.swift in Sources */,
 				CE2711A7260B4A4A00126D1F /* ProductionCountry.swift in Sources */,
 				CE27113B260AE58400126D1F /* BaseVM.swift in Sources */,

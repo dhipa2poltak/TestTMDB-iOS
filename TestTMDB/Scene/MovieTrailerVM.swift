@@ -7,17 +7,16 @@
 
 import Foundation
 import Alamofire
-import SVProgressHUD
 
 class MovieTrailerVM: BaseVM {
 
     var movieId = -1
-    var movieKey = ""
+    let movieKey = LiveData("")
 
     func fetchMovieTrailer(movieId: Int) {
-        SVProgressHUD.showGradient()
+        isShowDialogLoading.value = true
         request(RestService.fetchMovieTrailer(movieId: movieId)).responseJSON { [weak self] resp in
-            SVProgressHUD.dismiss()
+            self?.isShowDialogLoading.value = false
             resp.validate { json in
                 do {
                     let data = try json["results"].rawData(options: .prettyPrinted)
@@ -26,17 +25,14 @@ class MovieTrailerVM: BaseVM {
 
                     for trailer in trailers {
                         if trailer.site?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) == "youtube" {
-                            self?.movieKey = trailer.key ?? ""
+                            self?.movieKey.value = trailer.key ?? ""
                             break
                         }
                     }
-
-                    self?.didLayout()
                 } catch {
-                    SVProgressHUD.showDismissableError(with: error.localizedDescription)
+                    self?.toastMessage.value = "Error: \(error.localizedDescription)"
                 }
             }
         }
     }
 }
-

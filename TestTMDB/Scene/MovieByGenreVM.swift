@@ -6,21 +6,21 @@
 //
 
 import Foundation
-import SVProgressHUD
 import Alamofire
 
 class MovieByGenreVM: BaseVM {
 
     var movies: [Movie] = []
+    let movieData: LiveData<Movie?> = LiveData(nil)
 
     var genreId = -1
     var genreName = ""
     var page = 1
 
     func fetchMovieGenre(genreId: String, page: Int) {
-        SVProgressHUD.showGradient()
+        isShowDialogLoading.value = true
         request(RestService.fetchMovieByGenre(genreId: genreId, page: page)).responseJSON { [weak self] resp in
-            SVProgressHUD.dismiss()
+            self?.isShowDialogLoading.value = false
             resp.validate { json in
                 do {
                     let data = try json["results"].rawData(options: .prettyPrinted)
@@ -30,14 +30,13 @@ class MovieByGenreVM: BaseVM {
                     if movies.count > 0 {
                         for movie in movies {
                             self?.movies.append(movie)
+                            self?.movieData.value = movie
                         }
 
                         self?.page = page
                     }
-
-                    self?.didLayout()
                 } catch {
-                    SVProgressHUD.showDismissableError(with: error.localizedDescription)
+                    self?.toastMessage.value = "Error: \(error.localizedDescription)"
                 }
             }
         }

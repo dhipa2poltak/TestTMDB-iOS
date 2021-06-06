@@ -7,29 +7,28 @@
 
 import Foundation
 import Alamofire
-import SVProgressHUD
 
 class GenreVM: BaseVM {
     var genres: [Genre]?
+    let genreData: LiveData<[Genre]?> = LiveData(nil)
 
     func loadData(completion _: EmptyClosure?) {
         fetchMovieGenre()
     }
 
     func fetchMovieGenre() {
-        SVProgressHUD.showGradient()
+        isShowDialogLoading.value = true
         request(RestService.fetchMovieGenre).responseJSON { [weak self] resp in
-            SVProgressHUD.dismiss()
+            self?.isShowDialogLoading.value = false
             resp.validate { json in
                 do {
                     let data = try json["genres"].rawData(options: .prettyPrinted)
 
                     let genres: [Genre] = try JSONDecoder().decode([Genre].self, from: data)
                     self?.genres = genres
-
-                    self?.didLayout()
+                    self?.genreData.value = genres
                 } catch {
-                    SVProgressHUD.showDismissableError(with: error.localizedDescription)
+                    self?.toastMessage.value = "Error: \(error.localizedDescription)"
                 }
             }
         }

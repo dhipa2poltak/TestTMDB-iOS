@@ -6,14 +6,12 @@
 //
 
 import Foundation
-
 import UIKit
 
 class BaseVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addObserver()
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
@@ -73,14 +71,4 @@ class BaseVC: UIViewController {
     @objc func didTapBack(_: Any) {
         navigationController?.popViewController(animated: true)
     }
-
-    private func addObserver() {
-        print("ADD: layouting-\(addressString(self))")
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(layouting(notification:)),
-                                               name: NSNotification.Name(rawValue: "layouting-\(addressString(self))"),
-                                               object: nil)
-    }
-
-    @objc func layouting(notification _: NSNotification? = nil) {}
 }

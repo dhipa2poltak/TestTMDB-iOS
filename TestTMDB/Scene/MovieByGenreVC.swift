@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class MovieByGenreVC: BaseVC, UIScrollViewDelegate {
 
-    lazy var viewModel = MovieByGenreVM(vc: self)
+    lazy var viewModel = MovieByGenreVM()
 
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var movieCV: UICollectionView!
@@ -22,19 +23,42 @@ class MovieByGenreVC: BaseVC, UIScrollViewDelegate {
             lblTitle.text = "Genre \(viewModel.genreName) Movies"
         }
 
+        setupObserver()
+
         movieCV.delegate = self
         movieCV.dataSource = self
         movieCV.reloadData()
+    }
+
+    private func setupObserver() {
+        viewModel.isShowDialogLoading.observe { [weak self] value in
+            if value && self?.viewModel.movies.isEmpty ?? true {
+                SVProgressHUD.setOffsetFromCenter(UIOffset(horizontal: UIApplication.shared.keyWindow?.center.x ?? 0, vertical: UIApplication.shared.keyWindow?.center.y ?? 0))
+                SVProgressHUD.showGradient()
+            } else {
+                SVProgressHUD.dismiss()
+            }
+        }
+
+        viewModel.toastMessage.observe { [weak self] value in
+            if !value.isEmpty {
+                self?.showToast(message: value, font: .systemFont(ofSize: 12.0))
+                self?.viewModel.toastMessage.value = ""
+            }
+        }
+
+        viewModel.movieData.observe { [weak self] value in
+            if value != nil {
+                self?.movieCV.reloadData()
+                self?.viewModel.movieData.value = nil
+            }
+        }
     }
 
     override func viewDidAppear(_: Bool) {
         super.setupNavBar(transparant: true)
 
         viewModel.fetchMovieGenre(genreId: String(viewModel.genreId), page: viewModel.page)
-    }
-
-    @objc override func layouting(notification _: NSNotification? = nil) {
-        movieCV.reloadData()
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,

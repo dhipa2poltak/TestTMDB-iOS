@@ -7,17 +7,20 @@
 
 import Foundation
 import Alamofire
-import SVProgressHUD
 
 class MovieDetailVM: BaseVM {
 
     var movieId = -1
     var movieDetailsResponse: MovieDetailsResponse?
 
+    let titleMovie = LiveData("")
+    let urlImage = LiveData("")
+    let descMovie = LiveData("")
+
     func fetchMovieDetail(movieId: Int) {
-        SVProgressHUD.showGradient()
+        isShowDialogLoading.value = true
         request(RestService.fetchMovieDetail(movieId: movieId)).responseJSON { [weak self] resp in
-            SVProgressHUD.dismiss()
+            self?.isShowDialogLoading.value = false
             resp.validate { json in
                 do {
                     let data = try json.rawData(options: .prettyPrinted)
@@ -25,9 +28,11 @@ class MovieDetailVM: BaseVM {
                     let response = try JSONDecoder().decode(MovieDetailsResponse.self, from: data)
                     self?.movieDetailsResponse = response
 
-                    self?.didLayout()
+                    self?.titleMovie.value = response.title ?? ""
+                    self?.urlImage.value = Constant.IMAGE_URL_BASE_PATH + (response.posterPath ?? "")
+                    self?.descMovie.value = response.overview ?? ""
                 } catch {
-                    SVProgressHUD.showDismissableError(with: error.localizedDescription)
+                    self?.toastMessage.value = "Error: \(error.localizedDescription)"
                 }
             }
         }

@@ -6,12 +6,12 @@
 //
 
 import Foundation
-
 import UIKit
+import SVProgressHUD
 
 class GenreVC: BaseVC {
 
-    lazy var viewModel = GenreVM(vc: self)
+    lazy var viewModel = GenreVM()
 
     @IBOutlet weak var tableVw: UITableView!
 
@@ -27,6 +27,7 @@ class GenreVC: BaseVC {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupTableView()
+        setupObserver()
     }
 
     private func setupTableView() {
@@ -45,6 +46,32 @@ class GenreVC: BaseVC {
         //tableVw.register(genreTVCNib, forCellReuseIdentifier: "GenreTVC")
     }
 
+    private func setupObserver() {
+        viewModel.isShowDialogLoading.observe { value in
+            if value {
+                SVProgressHUD.setOffsetFromCenter(UIOffset(horizontal: UIApplication.shared.keyWindow?.center.x ?? 0, vertical: UIApplication.shared.keyWindow?.center.y ?? 0))
+                SVProgressHUD.showGradient()
+            } else {
+                SVProgressHUD.dismiss()
+            }
+        }
+
+        viewModel.toastMessage.observe { [weak self] value in
+            if !value.isEmpty {
+                self?.showToast(message: value, font: .systemFont(ofSize: 12.0))
+                self?.viewModel.toastMessage.value = ""
+            }
+        }
+
+        viewModel.genreData.observe { [weak self] value in
+            if value != nil {
+                self?.refreshControl.endRefreshing()
+                self?.tableVw.reloadData()
+                self?.viewModel.genreData.value = nil
+            }
+        }
+    }
+
     override func viewDidAppear(_: Bool) {
         super.setupNavBar(transparant: true)
 
@@ -53,11 +80,6 @@ class GenreVC: BaseVC {
 
     @objc private func didRefreshControl() {
         viewModel.loadData(completion: nil)
-    }
-
-    @objc override func layouting(notification _: NSNotification? = nil) {
-        refreshControl.endRefreshing()
-        tableVw.reloadData()
     }
 }
 
